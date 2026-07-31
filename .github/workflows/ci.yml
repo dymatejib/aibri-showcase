@@ -1,0 +1,54 @@
+# Кросс-платформенность витрины — машиной, а не рассуждением.
+#
+# «Работает на Linux и Windows» до сих пор держалось на чтении кода и грепе. Здесь
+# это проверяется на трёх ОС и четырёх версиях питона: у самой витрины внешних
+# зависимостей нет, ставится только pytest.
+#
+# macOS-раннер СОЗНАТЕЛЬНО идёт без `requirements-ocr.txt`: тесты фото-пути должны
+# ПРОПУСКАТЬСЯ с внятной причиной, и именно это здесь и проверяется — на всех трёх
+# ОС ожидается один и тот же результат.
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: pytest + стражи · ${{ matrix.os }} · py${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # ВСЯ история: страж сценария сравнивает время КОММИТОВ, а не mtime —
+          # при поверхностной выкачке ему просто нечего было бы сравнивать.
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install --upgrade pip
+      - run: pip install -r requirements.txt
+      - run: pytest
+      # Стражи гоняются и отдельными командами: у каждого свой построчный отчёт,
+      # и в логе видно, ЧТО именно проверено, а не только «всё зелёное».
+      - run: python -m guards.mutation_control
+      - run: python -m guards.grep_guard_single_impl
+      - run: python -m guards.oracle_stock_after_payment
+      - run: python -m guards.scenario_guard
+
+  lint:
+    name: ruff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff
+      - run: ruff check .
