@@ -1,0 +1,19 @@
+111222333
+Kassa cheki
+Z-hisobot raqami: 128
+FM raqami: FM00012345
+Ochilish sanasi: 2026-07-01 08:12:00
+Yopilish sanasi: 2026-07-01 22:05:00
+CHEKLAR
+Jami cheklar soni: 214
+TO'LOVLAR
+Umumiy naqd pul miqdori: 1 250 000.00
+Umumiy karta miqdori: 3 400 000.00
+Umumiy summa: 4 650 000.00
+Umumiy QQS miqdori: 263 207.55
+QAYTARUVLAR
+Umumiy naqd pul miqdori: 0.00
+Umumiy karta miqdori: 0.00
+Umumiy summa: 0.00
+JAMI
+Umumiy summa: 4 650 000.00

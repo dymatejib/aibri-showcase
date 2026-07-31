@@ -1,0 +1,10 @@
+111222333 | Chek | 2026-07-03
+2-hisobot ragami: | 137 | KANAL-A-Local
+FM raqami: | FM00012345 | Sverka itogov
+Ochilishı sanasi: | 2026-07-03 08:05:00 | Terminal 10000001
+Yopilish sallasi: | 2026-07-03 23:40:00 | Itogo: 1 800 000.00
+TO'LOVLAR
+Umumiy naqd pul miądori: | 700 | Komissiya | 0,00 UZS
+000.00 | KANAL-B | 210 000.00
+Umumiy karla migdori: | 1 800 000.00 | KANAL-C | 150 000.00
+Umumiy sumına: | 2 500 000.00 | KANAL-D | 90 000.00
