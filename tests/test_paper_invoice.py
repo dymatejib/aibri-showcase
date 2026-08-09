@@ -88,10 +88,10 @@ def test_строка_итога_не_становится_товаром(parsed
 def test_вес_в_колонке_количества_не_товар():
     """Второй рубеж той же защиты — подытог без слова «всего»."""
     text = ("№ | Наименование | Кол-во бл. | Кол-во шт. | Цена | Сумма\n"
-            "1 | Лимонад Дюшес | 2 | 24 | 5 000,00 | 120 000,00\n"
+            "1 | Santal BezGaz 0.50L | 2 | 24 | 5 000,00 | 120 000,00\n"
             "· | Сумма по весу | 120,00 кг |  |  | 120 000,00\n")
     lines = pi.parse_header_table(text)
-    assert [x["name"] for x in lines] == ["Лимонад Дюшес"]
+    assert [x["name"] for x in lines] == ["Santal BezGaz 0.50L"]
 
 
 def test_ндс_плоскость_не_завышает_количество(parsed):
@@ -111,7 +111,7 @@ def test_роли_колонок_разводит_заголовок(parsed):
     r = parsed["inv_06_grid_roles"]
     assert r["family"] == "grid"
     assert [(x["qty"], x["price"]) for x in r["lines"]] == [(60, 1200), (40, 2500),
-                                                            (80, 1500)]
+                                                            (80, 6000)]
 
 
 def test_итог_прописью_включает_судью(texts, parsed):
@@ -204,7 +204,7 @@ def test_итог_не_может_быть_инн_или_счётом():
     но деньгами не является."""
     text = ("НАКЛАДНАЯ № 1234 от 01.01.2026\nИНН 111222333\n"
             "Позиция | Цена | Кол-во | Стоимость\n"
-            "Лимонад Дюшес | 1 000 | 5 | 5 000\n"
+            "Santal BezGaz 0.50L | 1 000 | 5 | 5 000\n"
             "ИТОГО |  |  | 5 000\n")
     assert 111222333 in pi.doc_nonmoney(text)
     assert pi.total_candidates(text) == [5000]
@@ -221,7 +221,7 @@ def test_лейбл_итога_расширяется_данными(fresh_db):
     from aibri.recognition import corpus
     pi.patterns_reset()
     text = ("Позиция | Цена | Кол-во | Сумма\n"
-            "Лимонад Дюшес | 1 000 | 5 | 5 000\n"
+            "Santal BezGaz 0.50L | 1 000 | 5 | 5 000\n"
             "Barchasi: 5 000\n")
     assert pi.total_candidates(text) == []
     corpus.learn_pattern("invoice", "total_label", "label:total", "barchasi")

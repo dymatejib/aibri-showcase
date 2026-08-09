@@ -14,9 +14,9 @@ from aibri.money import ledger
 @pytest.fixture()
 def db(fresh_db):
     with fresh_db.conn() as c:
-        c.execute("INSERT INTO dealers(id,name) VALUES(1,'Дилер А')")
+        c.execute("INSERT INTO dealers(id,name) VALUES(1,'ООО «NDT DISTRIBUTION»')")
         c.execute("INSERT INTO products(id,name,purchase_price,stock) "
-                  "VALUES(10,'Лимонад Дюшес',2500,0)")
+                  "VALUES(10,'Santal BezGaz 0.50L',2500,0)")
         c.execute("INSERT INTO orders(id,num,dealer_id,status,total) "
                   "VALUES(100,'#100',1,'закрыт',300000)")
         c.execute("INSERT INTO stock_moves(order_id,product_id,kind,qty,price) "

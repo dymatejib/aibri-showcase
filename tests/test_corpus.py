@@ -25,7 +25,7 @@ def test_forget_снимает_но_не_удаляет(fresh_db):
 def test_правка_владельца_зачисляется_в_golden(fresh_db):
     """Раньше здесь стоял DELETE, и перевешивание одного алиаса физически
     уничтожало историю решений человека — из которой растёт корпус эталонов."""
-    corpus.record("photo_2.jpg", "invoice", {"pick": "Лимонад Дюшес"}, "owner_edit", 1.0)
+    corpus.record("photo_2.jpg", "invoice", {"pick": "Santal BezGaz 0.50L"}, "owner_edit", 1.0)
     corpus.forget("photo_2.jpg", "invoice")
     rows = corpus.golden_rows("invoice")
     assert len(rows) == 1 and rows[0]["golden"] == 1

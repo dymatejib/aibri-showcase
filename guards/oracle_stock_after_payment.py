@@ -33,11 +33,11 @@ def main():
 
     g = Guard("oracle_stock_after_payment")
     with db.conn() as c:
-        c.execute("INSERT INTO dealers(id,name) VALUES(1,'Дилер А')")
+        c.execute("INSERT INTO dealers(id,name) VALUES(1,'ООО «NDT DISTRIBUTION»')")
         c.execute("INSERT INTO products(id,name,purchase_price,stock) "
-                  "VALUES(10,'Лимонад Дюшес',2500,0)")
+                  "VALUES(10,'Santal BezGaz 0.50L',2500,0)")
         c.execute("INSERT INTO products(id,name,purchase_price,stock) "
-                  "VALUES(11,'Печенье Овсяное',7000,0)")
+                  "VALUES(11,'Choco Latto',7000,0)")
         c.execute("INSERT INTO orders(id,num,dealer_id,status,total) "
                   "VALUES(100,'#100',1,'в работе',300000)")
         c.execute("INSERT INTO orders(id,num,dealer_id,status,total) "

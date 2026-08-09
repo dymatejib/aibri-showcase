@@ -208,7 +208,7 @@ def test_шапка_документа_читается_с_фотографии(
     assert err is None
     r = pi.parse_invoice(text)
     assert (r["number"], r["date"]) == (DOC["number"], DOC["date"]), text
-    assert "ДЕМО-ТРЕЙД" in r["supplier"]
+    assert "NDT DISTRIBUTION" in r["supplier"]
 
 
 @mac_only
